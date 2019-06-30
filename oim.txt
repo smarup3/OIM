@@ -1,0 +1,87 @@
+Create Table and a user with select privileges.
+Determine a logic (this logic should check whether the user record already exists or its a new record) to generate User Login based on certain user parameters like Personnel Num, FN, LN etc)
+Derive a logic for status field.
+Login to Identity Self Service -> Manage -> Applications
+Create an application in Identity Self Service. The high-level steps are as follows:
+a. Log in to Identity Self Service either by using the System Administration
+  account or an account with the ApplicationInstanceAdministrator admin
+  role.
+b. Ensure that the Connector Package option is selected when creating an
+  application.
+c. Update the basic configuration parameters to include connectivity-related
+  information. (host, port, daabase name, jdbcDriver, jdbcURL, user, password, table, table Key, changeLogColumn (This column is important since it is used while running incremental recon), customizedQuery)
+d. If required, update the advanced setting parameters to update configuration
+  entries related to connector operations. (Connector Name, Connector Bundle, Connector version, Pool Settings (keep default))
+e. Add the attributes and provide the mappings.
+f. Review the provisioning, reconciliation, organization, and catalog settings for
+  your application and customize them if required. For example, you can customize the default correlation rules for your application if required.
+g. Review the details of the application and click Finish to submit the application details.
+The application is created in Oracle Identity Governance.
+h. When you are prompted whether you want to create a default request form,
+  click Yes or No.
+If you click Yes, then the default form is automatically created and is attached with the newly created application. The default form is created with the same name as the application. The default form cannot be modified later. Therefore, if you want to customize it, click No to manually create a new form and attach it with your application.
+
+Reconciliation rule:
+Simple Corelation rule:
+_UID_ equals User Login (AND)
+
+Situation and Responses:
+No Match Found - Create User
+One Entity Match Found - Establish Link
+
+
+Specifying a Value for the Filter Attribute
+You can perform limited reconciliation by creating filters for the reconciliation module.
+This connector provides a Filter attribute (a scheduled task attribute) that allows you to
+use any of the Database Application Tables resource attributes to filter the target
+system records.
+When you specify a value for the Filter attribute, only the target system records that
+match the filter criterion are reconciled into Oracle Identity Governance. If you do not
+specify a value for the Filter attribute, then all the records in the target system are
+reconciled into Oracle Identity Governance.
+You specify a value for the Filter attribute while configuring the user reconciliation
+scheduled job.
+For detailed information about Filters, see ICF Filter Syntax in Oracle Fusion
+Middleware Developing and Customizing Applications for Oracle Identity Governance.
+
+
+
+Specifying a Value for the customizedQuery Parameter
+If you want to filter values that are being retrieved from different tables by using native
+SQL queries, then use the customizedQuery property to configure limited
+reconciliation. You can configure limited reconciliation by specifying a value for either
+the customizedQuery property in the DBATConfiguration.groovy file or
+customizedQuery IT resource parameter.
+You must specify a WHERE clause specifying the subset of newly added or modified
+records that you want to reconcile as the value of the customizedQuery parameter. For
+example, specifying the following WHERE clause as the value of the customizedQuery
+parameter returns all user records whose first name is John:
+WHERE FIRST_NAME='JOHN'
+The following is another example of a WHERE clause that returns all user records
+whose location contains "land":
+WHERE LOCATION LIKE '%LAND'
+
+
+
+Sync Token
+
+Depending on the value specified for the changeLogColumn property in the Config entry of the DBATConfiguration.groovy file, this attribute holds one of the following values:
+
+For date or time stamp based columns:
+
+This attribute holds the date or time stamp at which the last reconciliation run started.
+
+For columns that are not date or time stamp based (for example, numeric or strings):
+
+This attribute holds the newest or the most recent value of the changeLog column of the record that was last reconciled.
+
+Sample value: <String>3</String>
+
+Note:
+
+- Do not enter a value for this attribute. The reconciliation engine automatically enters a value in this attribute.
+
+- This attribute stores values in an XML serialized format.
+
+
+https://www.oracle.com/middleware/technologies/identity-management/oim-connectors-downloads.html
