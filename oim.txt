@@ -60,3 +60,83 @@ return response;
 }
 
 }
+
+
+
+
+
+
+
+‐--------------
+
+
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Hashtable;
+
+import javax.security.auth.login.LoginException;
+
+import oracle.iam.identity.usermgmt.api.UserManager;
+import oracle.iam.identity.usermgmt.vo.User;
+import oracle.iam.platform.OIMClient;
+
+public class UpdateUserOrg {
+       public static void main(String[] args) throws IOException {
+             OIMClient client = getConnection();
+             UserManager mgr = null;
+             BufferedReader br = null;
+             try {
+                    br = new BufferedReader(new FileReader("C:\\FilePath\\a.txt"));
+                    mgr = client.getService(UserManager.class);
+                    String userLogin = "";
+                    HashSet<String> retAttr = new HashSet<String>();
+                    while ((userLogin = br.readLine()) != null) {
+                          System.out.println("Updating organization of:" + userLogin);
+                          User user = mgr.getDetails(userLogin, retAttr, true);
+                          if (user != null) {
+                                 User us=new User(user.getEntityId());
+                                 us.setOrganizationKey("24");//Put ACT_Key of the required org
+                                 mgr.modify(us);
+                                 System.out.println("Updated organization of:" + userLogin);
+                          } else
+                                 System.out.println(userLogin + " not found");
+                    }
+             }
+
+             catch (Exception e) {
+                    System.out.println(e.getMessage());
+             } finally {
+                    if (br != null)
+                          br.close();
+             }
+       }
+
+       public static OIMClient getConnection() {
+             Hashtable<Object, Object> env = new Hashtable<Object, Object>();
+             env.put(OIMClient.JAVA_NAMING_FACTORY_INITIAL, "weblogic.jndi.WLInitialContextFactory");
+             env.put(OIMClient.JAVA_NAMING_PROVIDER_URL, "t3://Host:Port");
+              System.setProperty("java.security.auth.login.config",
+                    "authwl.conf");
+
+             System.setProperty("OIM.AppServerType", "wls");
+             System.setProperty("APPSERVER_TYPE", "wls");
+             oracle.iam.platform.OIMClient oimClient = new oracle.iam.platform.OIMClient(env);
+
+             try {
+                    System.out.println("Fetching OIM connection");
+                    oimClient.login("", "".toCharArray());
+
+                    System.out.print("Successfully Connected with OIM ");
+             } catch (LoginException e) {
+                    System.out.print("Login Exception" + e);
+             }
+
+             return oimClient;
+
+       }
+
+}
+
