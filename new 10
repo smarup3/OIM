@@ -1,0 +1,22 @@
+
+One of the major challenge cyber insurance industry facing is adjusting the pricing strategies for different end users and different organizations
+In this paper to address competitive pricing problem they have proposed a two stage model i.e the Stackelberg game. 
+In first stage, insurers identify their pricing stratgey based on the client requirements. 
+In the second stage, end users will independently make decisions after analyzing the price and security service attached by insurers. 
+
+Methodology:
+------------------------
+They considered a market in which two insurers compete for selling cyber insurance to a network of users.
+In the first stage two insurers set their price for users to sell their products. Assuming that every user determines the portion of cyber insurance to be purchased from both insurers then utility of user taking the action is derived.
+
+
+
+To evaluate the performance of the Stackelberg game through simulations they evaluated user's total profit, insurer's profit and the prices of insurance when the number of users increases with different levels of correlation amongst the users.
+The results shows that user's total utility increases with the number of users and also the total utility in market with strong interdependency is higher when compared to that of in the market with weak correlation between users.. This is because if an user gets cyber insurance product from one insurer, all the associated users will likely to get the insurance from same insurer.
+Also the profit for an insurer in the market with higher correlation between users is higher than in the market with weak correlation. Hence, the insurer who attaches the security service with high quality to the insurance will attract more users and become more dominant in the market even though the price is little higher compared to competitors offering it in lower prices.
+Further evaluating the quality of security service and level of correlation between users, it is also observed that users will stick to the insurer with security service of higher quality even though the correlation varies in the market.
+
+
+Findings
+-------------------
+To address the pricing problem,Stackelberg game presents a model for maximing the utility for users and also maximizing the profits for cyber insurers. 
