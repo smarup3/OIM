@@ -20,3 +20,13 @@ Further evaluating the quality of security service and level of correlation betw
 Findings
 -------------------
 To address the pricing problem,Stackelberg game presents a model for maximing the utility for users and also maximizing the profits for cyber insurers. 
+
+
+
+
+A First Look at Differentiated Pricing Markets
+--------------------------------------------------------
+Similarly using  Stackelberg games concept, authors developed a new Differentiated Pricing model which can yield more profits to the Security providers as opposed to the uniform pricing mechanism.
+In real world, most of the users who bought security products won't make use of it to the full extent.Simalarly other section of users who paid the same price for that product will make use of it to full extent.
+So the idea behind this model is to charge end user based on their usage and building a free raider free netwok. security providers could earn more profits than of uniform pricing mechanisms and inturn these profits can be shared with cyber insurers for sharing information about en user security behaviour..
+Extra profits by cyber insurers is the key for market to be viable.
