@@ -62,7 +62,105 @@ return response;
 }
 
 
+‐------------------
+package com.adapter.rest;
 
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+
+import oracle.iam.platform.Platform;
+import Thor.API.tcResultSet;
+import Thor.API.Operations.tcITResourceInstanceOperationsIntf;
+
+public class RestAdapter {
+
+private static final Logger LOGGER = Logger.getLogger("RestAdapter");
+
+public String pushUserLoginInSAP(String userLogin, String employeeNumber,
+String itResource) {
+LOGGER.log(Level.INFO,
+"Entering pushUserLoginInSAP method::User Login: " + userLogin
++ "::employeeNumber:" + employeeNumber
++ "::itResource:" + itResource);
+String response = "FAILED";
+HashMap<String, String> itResMap = new HashMap<String, String>();
+String serviceURL = "";
+try {
+itResMap = getITResourceValues(itResource);
+LOGGER.log(Level.INFO,"IT ResourceMap:"+itResMap);
+serviceURL = itResMap.get("WebService URL") + "/" + employeeNumber
++ "/" + userLogin;
+LOGGER.log(Level.INFO,"Service URL:"+serviceURL);
+Client restClient = Client.create();
+WebResource webResource = restClient.resource(serviceURL);
+ClientResponse resp = webResource
+.accept("application/json")
+.header("Authorization",
+"Basic " + itResMap.get("Authorization Token"))
+.get(ClientResponse.class);
+if (resp.getStatus() != 200) {
+LOGGER.log(Level.INFO,"Response Code:"+resp.getStatus());
+LOGGER.log(Level.INFO,"Response:"+resp.getEntity(String.class));
+response=resp.getStatus()+resp.getEntity(String.class);
+}
+else
+{
+LOGGER.log(Level.INFO,"Successfully updated employee number");
+response="SUCCESS";
+}
+
+} catch (Exception e) {
+//System.out.println(e.getMessage());
+LOGGER.log(Level.SEVERE,"Exception occurred while invoking webservice:"+e.getMessage());
+response=e.getMessage();
+}
+LOGGER.log(Level.INFO,"Exiting pushUserLoginInSAP method:"+response);
+return response;
+
+}
+
+private HashMap<String, String> getITResourceValues(String itResource) {
+
+LOGGER.log(Level.FINE, "Entering getITResourceValues");
+tcITResourceInstanceOperationsIntf tcITResourceIntf = Platform
+.getService(tcITResourceInstanceOperationsIntf.class);
+HashMap<String, String> searchcriteria = new HashMap<String, String>();
+HashMap<String, String> itResourceMap = new HashMap<String, String>();
+searchcriteria.put("IT Resources.Name", itResource);
+try {
+tcResultSet resultSet = tcITResourceIntf
+.findITResourceInstances(searchcriteria);
+resultSet = tcITResourceIntf
+.getITResourceInstanceParameters(resultSet
+.getLongValue("IT Resources.Key"));
+
+for (int i = 0; i < resultSet.getRowCount(); i++) {
+resultSet.goToRow(i);
+
+String name = resultSet
+.getStringValue("IT Resources Type Parameter.Name");
+
+String value = resultSet
+.getStringValue("IT Resources Type Parameter Value.Value");
+itResourceMap.put(name, value);
+}
+
+} catch (Exception e) {
+LOGGER.log(
+Level.SEVERE,
+"Exception ocurred while fetching ITResource values"
++ e.getMessage());
+}
+LOGGER.log(Level.FINE, "Exiting getITResourceValues");
+return itResourceMap;
+
+}
+
+}
 
 
 
