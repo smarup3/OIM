@@ -1,0 +1,11 @@
+JBO-29000: Unexpected exception caught: oracle.bpel.services.workflow.client.WorkflowServiceClientException, msg=javax.naming.CommunicationException: Failed to initialize JNDI context, tried 2 time or times totally, 
+the interval of each time is 0ms. t3s://al1vxoimq001.tesoropetroleum.com,al1vxoimq002.tesoropetroleum.com:16210: Destination 10.244.169.28, 16210 unreachable.; 
+nested exception is: java.net.ConnectException: Connection refused; No available router to destination.; nested exception is: java.rmi.ConnectException: No available router to destination. 
+[Root exception is java.net.ConnectException: t3s://al1vxoimq001.tesoropetroleum.com,al1vxoimq002.tesoropetroleum.com:16210: Destination 10.244.169.28, 
+16210 unreachable.; nested exception is: java.net.ConnectException: Connection refused; No available router to destination.; nested exception is: java.rmi.ConnectException: No available router to destination.]
+
+
+
+ <Error> <oracle.iam.request.impl> <IAM-2050014> <An error occurred while initiating approvals for request 73001. The corresponding error message is Unable to instantiate the workflow process due to: No available router to destination..>
+ <Error> <oracle.iam.request.impl> <IAM-2050050> <Exception thrown oracle.iam.platform.workflowservice.exception.IAMWorkflowException: Unable to instantiate the workflow process due to: No available router to destination.>
+ <Error> <oracle.iam.request.impl> <BEA-000000> <In class InitiateApproval/execute Exception thrown
