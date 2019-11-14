@@ -9,3 +9,83 @@ nested exception is: java.net.ConnectException: Connection refused; No available
  <Error> <oracle.iam.request.impl> <IAM-2050014> <An error occurred while initiating approvals for request 73001. The corresponding error message is Unable to instantiate the workflow process due to: No available router to destination..>
  <Error> <oracle.iam.request.impl> <IAM-2050050> <Exception thrown oracle.iam.platform.workflowservice.exception.IAMWorkflowException: Unable to instantiate the workflow process due to: No available router to destination.>
  <Error> <oracle.iam.request.impl> <BEA-000000> <In class InitiateApproval/execute Exception thrown
+
+
+<Nov 14, 2019 10:04:36,253 AM CST> <Error> <oracle.iam.platform.kernel.impl> <IAM-0080075> <XML schema validation failed for XML /metadata/iam-features-OIMMigration/EventHandlers.xml : eventhandlers and it will not be loaded by kernel. >
+<Nov 14, 2019 10:04:38,562 AM CST> <Warning> <oracle.iam.callbacks.common> <IAM-2030090> <[CALLBACKMSG] Found 0 possible matches for applicable policies for step POST_PROCESS, entity Role, operation MODIFY.>
+<Nov 14, 2019 10:04:38,563 AM CST> <Warning> <oracle.iam.callbacks.common> <IAM-2030146> <[CALLBACKMSG] Are applicable policies present for this async eventhandler ? : false>
+<Nov 14, 2019 10:04:39,359 AM CST> <Warning> <oracle.iam.platform.kernel.impl> <IAM-0089999> <Kernel Information:
+====================================
+Flow for Process Id 3573000 name 72003821-4c28-432a-86c1-2f06a7346a06
+====================================
+>
+<Nov 14, 2019 10:04:40,766 AM CST> <Warning> <oracle.iam.platform.workflowservice> <BEA-000000> < Exception in tid :40
+java.rmi.ConnectException: No available router to destination.
+        at weblogic.rjvm.ConnectionManager.findOrCreateRouter(ConnectionManager.java:1822)
+        at weblogic.rjvm.ConnectionManager.bootstrap(ConnectionManager.java:520)
+        at weblogic.rjvm.ConnectionManager.bootstrap(ConnectionManager.java:458)
+        at weblogic.rjvm.RJVMImpl.ensureConnectionEstablishedByURL(RJVMImpl.java:381)
+        at weblogic.rjvm.RJVMImpl.getOutputStreamByURL(RJVMImpl.java:467)
+        at weblogic.rjvm.RJVMImpl.getMsgAbbrevOutputStream(RJVMImpl.java:802)
+        at weblogic.rjvm.RJVMImpl.getRequestStream(RJVMImpl.java:793)
+        at weblogic.rjvm.RJVMImpl.getOutboundRequest(RJVMImpl.java:1064)
+        at weblogic.rmi.internal.BasicRemoteRef.getRequest(BasicRemoteRef.java:235)
+        at weblogic.rmi.internal.BasicRemoteRef.getOutboundRequest(BasicRemoteRef.java:199)
+        at weblogic.rmi.cluster.ClusterableRemoteRef.invoke(ClusterableRemoteRef.java:542)
+        at weblogic.rmi.cluster.ClusterableRemoteRef.invoke(ClusterableRemoteRef.java:313)
+        at oracle.soa.management.internal.ejb.impl.FacadeFinderBean_un9o0w_FacadeFinderBeanImpl_12213_WLStub.lookupComposite(Unknown Source)
+        at oracle.soa.management.internal.ejb.EJBLocatorImpl.lookupComposite(EJBLocatorImpl.java:258)
+        at oracle.iam.platform.workflowservice.impl.BPELProvider.lookupComposite(BPELProvider.java:468)
+        at oracle.iam.platform.workflowservice.impl.BPELProvider.initiate(BPELProvider.java:408)
+        at oracle.iam.platform.workflowservice.impl.WorkflowServiceImpl.initiate(WorkflowServiceImpl.java:216)
+        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.lang.reflect.Method.invoke(Method.java:498)
+        at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:318)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:183)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:150)
+        at oracle.iam.platform.utils.LoggerInterceptor.invoke(LoggerInterceptor.java:55)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
+        at oracle.iam.platform.utils.DMSMethodInterceptor.invoke(DMSMethodInterceptor.java:37)
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:172)
+        at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:202)
+        at com.sun.proxy.$Proxy603.initiate(Unknown Source)
+        at oracle.iam.request.impl.ApprovalManager.initiateSOAWorkflow(ApprovalManager.java:1057)
+        at oracle.iam.request.impl.ApprovalManager.initiateWorkflowPolicyBasedWorkflow(ApprovalManager.java:883)
+        at oracle.iam.request.eventhandlers.InitiateApproval.initiateApprovalWorkflow(InitiateApproval.java:149)
+        at oracle.iam.request.eventhandlers.InitiateApproval.execute(InitiateApproval.java:81)
+        at oracle.iam.platform.kernel.impl.OIMEvent.executeHandlers(OIMEvent.java:209)
+        at oracle.iam.platform.kernel.impl.MonitoredOIMEvent.invokeExecuteHandler(MonitoredOIMEvent.java:99)
+        at oracle.iam.platform.kernel.impl.MonitoredOIMEvent.executeHandlers(MonitoredOIMEvent.java:69)
+        at oracle.iam.platform.kernel.impl.OIMEvent.execute(OIMEvent.java:157)
+        at oracle.iam.platform.kernel.impl.ProcessImpl.executeStage(ProcessImpl.java:223)
+        at oracle.iam.platform.kernel.impl.OIMProcess.doStageExecution(OIMProcess.java:39)
+        at oracle.iam.platform.kernel.impl.ProcessImpl.execute(ProcessImpl.java:182)
+        at oracle.iam.platform.kernel.impl.MonitoredOIMProcess.execute(MonitoredOIMProcess.java:33)
+        at oracle.iam.platform.kernel.impl.Utils.manageSyncProcessing(Utils.java:73)
+        at oracle.iam.platform.kernel.impl.OrchestrationAsyncTask$2.execute(OrchestrationAsyncTask.java:101)
+        at oracle.iam.platform.kernel.impl.Utils.executeInContext(Utils.java:60)
+        at oracle.iam.platform.kernel.impl.Utils.executeInContext(Utils.java:46)
+        at oracle.iam.platform.kernel.impl.OrchestrationAsyncTask.executeInOrchContext(OrchestrationAsyncTask.java:97)
+        at oracle.iam.platform.kernel.impl.OrchestrationAsyncTask.execute(OrchestrationAsyncTask.java:74)
+        at oracle.iam.platform.async.impl.TaskExecutor.executeUnmanagedTask(TaskExecutor.java:100)
+        at oracle.iam.platform.async.impl.TaskExecutor.execute(TaskExecutor.java:70)
+        at oracle.iam.platform.async.messaging.MessageReceiver.onMessage(MessageReceiver.java:68)
+        at weblogic.ejb.container.internal.MDListener.execute(MDListener.java:438)
+        at weblogic.ejb.container.internal.MDListener.transactionalOnMessage(MDListener.java:361)
+        at weblogic.ejb.container.internal.MDListener.onMessage(MDListener.java:297)
+        at weblogic.jms.client.JMSSession.onMessage(JMSSession.java:5107)
+        at weblogic.jms.client.JMSSession.execute(JMSSession.java:4775)
+        at weblogic.jms.client.JMSSession.executeMessage(JMSSession.java:4170)
+        at weblogic.jms.client.JMSSession.access$000(JMSSession.java:127)
+        at weblogic.jms.client.JMSSession$UseForRunnable.run(JMSSession.java:5627)
+        at weblogic.work.SelfTuningWorkManagerImpl$WorkAdapterImpl.run(SelfTuningWorkManagerImpl.java:670)
+        at weblogic.invocation.ComponentInvocationContextManager._runAs(ComponentInvocationContextManager.java:352)
+        at weblogic.invocation.ComponentInvocationContextManager.runAs(ComponentInvocationContextManager.java:337)
+        at weblogic.work.LivePartitionUtility.doRunWorkUnderContext(LivePartitionUtility.java:57)
+        at weblogic.work.PartitionUtility.runWorkUnderContext(PartitionUtility.java:41)
+        at weblogic.work.SelfTuningWorkManagerImpl.runWorkUnderContext(SelfTuningWorkManagerImpl.java:644)
+        at weblogic.work.ExecuteThread.execute(ExecuteThread.java:415)
+        at weblogic.work.ExecuteThread.run(ExecuteThread.java:355)
+>
